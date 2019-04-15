@@ -1,6 +1,6 @@
 def var_etat_A(PIB, nb_init) :
     """int * int -> int
-    retourne l'evolution du nombres de millionaires au lieu A de t a t+1"""
+    retourne l'evolution du nombres de millionaires au lieu A de t a t+1 sans compter les migrations"""
 
     #nb : int
     nb = 0 
