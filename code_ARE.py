@@ -1,6 +1,6 @@
 def var_etat_A(PIB, nb_init) :
     """int * int -> int
-    retourne l'evolution du nombres de millionaires au lieu A de t a t+1 sans compter les migrations"""
+    retourne l'evolution du nombre de millionaires dans la zone A de t a t+1 sans compter les migrations"""
 
     #nb : int
     nb = 0 
@@ -34,7 +34,8 @@ def var_A(PIB, pop_init, n):
     
 def var_etat_B( nb_init) :
     """int  -> float
-    retourne l'evolution du nombres de millionaires au lieu A de t a t+1"""
+    retourne l'evolution du nombre de millionaires dans la zone B de t a t+1 
+    sans compter les émigrations"""
     return int (1.1 * nb_init)
     
 
@@ -55,7 +56,7 @@ def var_B(pop_init, n):
 def passage_de_A_B (ind_eduA, ind_eduB, ind_secA, ind_secB) :
     
     """float**4 -> float
-    calcul la probabilité qu'un millionaires qui quitte son pays A pour vivre vers B en fonction des
+    calcul la probabilité qu'un millionaires qui quitte la zone A vers B en fonction des
     conditions sociales de A et de B """
     
     #ind_social_A : float
@@ -99,6 +100,7 @@ def liste_depart(n, pop_init, ind_secuA, ind_eduA, ind_secuB, ind_eduB) :
         nb = temp - temp*passage_de_A_B(ind_eduA, ind_eduB, ind_secuA, ind_secuB)  
         
     return res
+    
     
 
 def passage_de_B_C (taux_impotB, taux_impotC, ind_eduC, ind_secC, patrimoine) : 
@@ -156,7 +158,7 @@ def liste_depart_BC(n, pop_init, taux_impotB, ind_eduC, ind_secuC, taux_impotC, 
     e = 0 
     #i : int 
     for i in range(0, n) : 
-    	e = int(nb * passage_de_B_C(taux_impotB, taux_impotC, ind_eduC, ind_secuC, patrimoine))
+        e = int(nb * passage_de_B_C(taux_impotB, taux_impotC, ind_eduC, ind_secuC, patrimoine))
         res.append(e)
         temp = var_etat_B(nb - e)
         nb = temp + liste_depart(n, pop_init, ind_secuA, ind_eduA, ind_secuB, ind_eduB)[i]
@@ -166,7 +168,7 @@ def liste_depart_BC(n, pop_init, taux_impotB, ind_eduC, ind_secuC, taux_impotC, 
     
 def evolution_tot(n) :
     """ int-> dict[str : int]
-    retourne le nombre de riches en A, B, C au bout de n années """
+    retourne le nombre de riches dans les zones A, B, C au bout de n années """
     
     #int : n_final_A
     n_final_A = nb_A
