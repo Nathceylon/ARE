@@ -145,21 +145,24 @@ def passage_de_B_C (taux_impotB, taux_impotC, ind_eduC, ind_secC, patrimoine) :
 
     return prob_B_vers_C
     
-def liste_depart_BC(n, pop_init, taux_impotB, ind_eduC, ind_secuC, taux_impotC, patrimoine) : 
-    """int * int * (float ** 4) -> liste[int]"""
-    #ind_social_C : float
-    ind_social_C = ind_eduC + ind_secuC
+def liste_depart_BC(n, pop_init, taux_impotB, ind_eduC, ind_secuC, taux_impotC, patrimoine, ind_secuA, ind_eduA, ind_secuB, ind_eduB) : 
+    """int * int * (float ** 4) *int * int *int *int  -> liste[int]"""
+    
     #res : liste[int]
     res = []
     #nb : int
     nb = pop_init
+    #e : int 
+    e = 0 
     #i : int 
     for i in range(0, n) : 
-        res.append(int(nb*passage_de_B_C(taux_impotB, taux_impotC, ind_eduC, ind_secuC, patrimoine)))
-        temp = var_etat_B(nb)
-        nb = temp - temp*passage_de_B_C(taux_impotB, taux_impotC, ind_eduC, ind_secuC, patrimoine) + liste_depart(n, pop_init, ind_secuA, ind_eduA, ind_secuB, ind_eduB)[i]
+    	e = int(nb * passage_de_B_C(taux_impotB, taux_impotC, ind_eduC, ind_secuC, patrimoine))
+        res.append(e)
+        temp = var_etat_B(nb - e)
+        nb = temp + liste_depart(n, pop_init, ind_secuA, ind_eduA, ind_secuB, ind_eduB)[i]
         
     return res
+    
     
 def evolution_tot(n) :
     """ int-> dict[str : int]
