@@ -56,7 +56,7 @@ def var_B(pop_init, n):
 def passage_de_A_B (ind_eduA, ind_eduB, ind_secA, ind_secB) :
     
     """float**4 -> float
-    calcul la probabilité qu'un millionaires qui quitte la zone A vers B en fonction des
+    calcule la probabilité qu'un millionaire quitte la zone A pour B en fonction des
     conditions sociales de A et de B """
     
     #ind_social_A : float
